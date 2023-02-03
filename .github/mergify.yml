@@ -1,7 +1,9 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
-      - "#approved-reviews-by>=0"
+      - and:
+          - "#approved-reviews-by>=0"
+          - label=automerge
     actions:
       merge:
         method: merge
