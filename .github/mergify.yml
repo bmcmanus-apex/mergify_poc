@@ -41,6 +41,14 @@ pull_request_rules:
     actions:
       delete_head_branch:
       
+  - name: Label as Stale
+    conditions:
+      - updated-at<1 days ago
+    actions:
+      label:
+        add:
+          - stale
+      
   - name: Notify author on queue failure
     conditions:
       - 'check-failure=Queue: Embarked in merge train'
