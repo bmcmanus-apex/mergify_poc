@@ -1,0 +1,25 @@
+name: Lint Docs
+on: pull_request
+
+
+jobs:
+  lint-docs:
+    runs-on: ubuntu-20.04
+    env:
+      DOC_DIFFS_FILE: "/tmp/doc-diffs.txt"
+    steps:
+      - name: echo workflow id
+        run: |
+          echo "${{ github.workflow }}"
+
+      - name: checkout HEAD
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: --prose-wrap=always **/*.md --check
+          only_changed: True
+          dry: True
