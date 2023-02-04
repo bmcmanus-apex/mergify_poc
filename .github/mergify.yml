@@ -1,16 +1,18 @@
 queue_rules:
   - name: hotfix
-    merge_conditions: []
+    merge_conditions:
+      - check-success=Lint Docs / lint-docs (pull_request)
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/hotfix_queue/
 
   - name: default
-    merge_conditions: []
+    merge_conditions:
+      - check-success=Lint Docs / lint-docs (pull_request)
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/merge_queue/
-    
+
 
 pull_request_rules:
   - name: Enqueue on Approval
@@ -21,12 +23,13 @@ pull_request_rules:
           - label=automerge
           - label!=stale
           - label!=do-not-merge
+          - check-success=Lint Docs / lint-docs (pull_request)
     actions:
       queue:
-        
+
   - name: Enqueue Hotfix on Approval
     conditions:
-      - and: 
+      - and:
           - base=main
           - "#approved-reviews-by>=0"
           - label=automerge
@@ -40,7 +43,7 @@ pull_request_rules:
       - merged
     actions:
       delete_head_branch:
-      
+
   - name: Label as Stale
     conditions:
       - updated-at<1 days ago
@@ -48,7 +51,7 @@ pull_request_rules:
       label:
         add:
           - stale
-          
+
   - name: Close Stale Prs
     conditions:
       - label=stale
@@ -57,7 +60,7 @@ pull_request_rules:
       close:
         message: >
           This Pr was closed due to a stale status of > 1 day.
-      
+
   - name: Notify author on queue failure
     conditions:
       - 'check-failure=Queue: Embarked in merge train'
@@ -70,4 +73,3 @@ pull_request_rules:
           with `@mergifyio requeue`.
           More details can be found on the `Queue: Embarked in merge train`
           check-run.
-
