@@ -11,3 +11,7 @@ The Mergify configuration is defined in the `.github/mergify.yml`
 There are two merge queues defined; a hotfix queue and the default queue. Queues
 are executed in order and having a hotfix queue enables high priority PRs to
 easily get scheduled before other PRs.
+
+### Workflows
+
+A linting workflow that runs prettier on docs in this repository has been added and is a required check that can be easily failed.
