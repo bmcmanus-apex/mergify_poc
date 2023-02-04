@@ -1,14 +1,12 @@
 queue_rules:
   - name: hotfix
-    merge_conditions:
-      - check-success=Lint Docs / lint-docs (pull_request)
+    merge_conditions: []
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/hotfix_queue/
 
   - name: default
-    merge_conditions:
-      - check-success=Lint Docs / lint-docs (pull_request)
+    merge_conditions: []
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/merge_queue/
@@ -23,7 +21,6 @@ pull_request_rules:
           - label=automerge
           - label!=stale
           - label!=do-not-merge
-          - check-success=Lint Docs / lint-docs (pull_request)
     actions:
       queue:
 
