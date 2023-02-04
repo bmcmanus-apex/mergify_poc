@@ -48,6 +48,15 @@ pull_request_rules:
       label:
         add:
           - stale
+          
+  - name: Close Stale Prs
+    conditions:
+      - label=stale
+      - updated-at<1 days ago
+    actions:
+      close:
+        message: >
+          This Pr was closed due to a stale status of > 1 day.
       
   - name: Notify author on queue failure
     conditions:
