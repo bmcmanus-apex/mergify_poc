@@ -15,80 +15,11 @@ jobs:
       - name: checkout HEAD
         uses: actions/checkout@v3
         with:
-          lfs: true
+          ref: ${{ github.head_ref }}
 
       - name: Prettify code
         uses: creyD/prettier_action@v4.2
         with:
-          prettier_options: --write --prose-wrap=always **/*.md
+          prettier_options: --prose-wrap=always **/*.md --check
           only_changed: True
-
-      - id: docs_diff
-        name: diff
-        continue-on-error: true
-        run: |
-          out=$(git diff --name-only)
-          if [ "${out:-x}" != "x" ]; then
-            echo "${out}"
-            echo "errors=${out}" >> $GITHUB_OUTPUT
-            echo $out > $DOC_DIFFS_FILE
-          fi
-
-      - id: find_comment
-        if: github.event_name != 'push'
-        name: find existing comment
-        uses: peter-evans/find-comment@v2
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: "<!-- DevEx Documentation Diffs -->"
-
-      - name: delete comment
-        if: steps.find_comment.outputs.comment-id != ''
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.deleteComment({
-              comment_id: ${{ steps.find_comment.outputs.comment-id }},
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            })
-
-      - id: format_comment_body
-        if: github.event_name != 'push' && steps.docs_diff.outputs.errors != ''
-        name: format comment body
-        run: |
-          body="$(cat ${DOC_DIFFS_FILE})"
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}"
-          echo "body=$body" >> $GITHUB_OUTPUT
-
-      - name: create comment
-        uses: peter-evans/create-or-update-comment@v2
-        if: github.event_name != 'push' && steps.docs_diff.outputs.errors != ''
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            <!-- Documentation Diffs -->
-            :warning: There are documentation files that require formatting! :warning:
-
-            Please format files with the command `prettier -w --prose-wrap=always README.md`.
-
-            <details>
-            <summary><i>Documentation Diffs</i></summary>
-            <p>
-
-            ```
-            ${{ steps.format_comment_body.outputs.body }}
-            ```
-
-            </p>
-            </details>
-
-      - name: fail job
-        if: steps.docs_diff.outputs.errors != ''
-        run: |
-          # Fail job
-          echo "There is documentation that needs formatted, failing job"
-          exit 1;
+          dry: True
