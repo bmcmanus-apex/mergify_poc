@@ -17,6 +17,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: buy some time
+        run: sleep 30s
+        shell: bash
+
       - name: Prettify code
         uses: creyD/prettier_action@v4.2
         with:
