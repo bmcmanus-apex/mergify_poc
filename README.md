@@ -20,7 +20,7 @@ easily get scheduled before other PRs.
 - What do GitHub interactions look like
 - What happens with the merge button
 
-#### Merge Queue Test Cases
+#### Merge Queue
 
 - Merge Conflict
 - speculative checks
