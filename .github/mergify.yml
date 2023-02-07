@@ -29,7 +29,6 @@ pull_request_rules:
       - and:
           - base=main
           - "#approved-reviews-by>=0"
-          - label=automerge
           - label=hotfix
     actions:
       queue:
