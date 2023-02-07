@@ -14,19 +14,19 @@ easily get scheduled before other PRs.
 
 ### Scope
 
-* merge queues
-* policy enforcement
-* bulldozer
-* What do GitHub interactions look like
-* What happens with the merge button
+- merge queues
+- policy enforcement
+- bulldozer
+- What do GitHub interactions look like
+- What happens with the merge button
 
 #### Merge Queue Test Cases
 
-* Merge Conflict
-* speculative checks
-  * failing PR front of queue
-  * failing PR last in queue
-  * requeue
-  * removing a PR from a queue
-  * can you jump queue
-    * Hotfix
+- Merge Conflict
+- speculative checks
+  - failing PR front of queue
+  - failing PR last in queue
+  - requeue
+  - removing a PR from a queue
+  - can you jump queue
+    - Hotfix
