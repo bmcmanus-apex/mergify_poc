@@ -14,7 +14,7 @@ queue_rules:
         - and:
           - base=main
           - label!=do-not-merge
-          - "#approved-reviews-by>=2"
+          - "#approved-reviews-by>=1"
           - files~=^.github/
         - and:
           - base=main
