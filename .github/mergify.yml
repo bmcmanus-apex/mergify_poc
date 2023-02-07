@@ -1,12 +1,18 @@
 queue_rules:
   - name: hotfix
-    merge_conditions: []
+    merge_conditions:
+      - and:
+        - base=main
+        - label!=do-not-merge
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/hotfix_queue/
 
   - name: default
-    merge_conditions: []
+    merge_conditions:
+      - and:
+        - base=main
+        - label!=do-not-merge
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/merge_queue/
