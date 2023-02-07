@@ -16,6 +16,7 @@ easily get scheduled before other PRs.
 
 - merge queues
 - policy enforcement
+  - path based
 - bulldozer
 - What do GitHub interactions look like
 - What happens with the merge button
@@ -30,3 +31,5 @@ easily get scheduled before other PRs.
   - removing a PR from a queue
   - can you jump queue
     - Hotfix
+
+* this should fail
