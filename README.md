@@ -23,13 +23,14 @@ easily get scheduled before other PRs.
 
 #### Merge Queue Test Cases To Demo
 
-- Merge Conflict
-- speculative checks
-  - failing PR front of queue
-  - failing PR last in queue
-  - requeue
-  - removing a PR from a queue
-  - can you jump queue
-    - Hotfix
-
+* Merge Conflict
+* speculative checks
+  * failing PR front of queue
+  * failing PR last in queue
+  * requeue
+  * removing a PR from a queue
+  * can you jump queue
+    * Hotfix
 * this should fail
+* this should definitely fail
+* why does this work
