@@ -31,5 +31,3 @@ easily get scheduled before other PRs.
   - removing a PR from a queue
   - can you jump queue
     - Hotfix
-
-* this should fail
