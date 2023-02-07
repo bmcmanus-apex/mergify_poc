@@ -10,9 +10,16 @@ queue_rules:
 
   - name: default
     merge_conditions:
-      - and:
-        - base=main
-        - label!=do-not-merge
+      - or:
+        - and:
+          - base=main
+          - label!=do-not-merge
+          - "#approved-reviews-by>=2"
+          - files~=^.github/
+        - and:
+          - base=main
+          - label!=do-not-merge
+          - -files~=^.github/
     merge_method: squash
     speculative_checks: 3
     queue_branch_prefix: mergify_poc/merge_queue/
