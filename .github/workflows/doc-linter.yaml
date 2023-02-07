@@ -22,7 +22,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: buy some time
+      - name: sleep some
         run: sleep 30s
         shell: bash
 
