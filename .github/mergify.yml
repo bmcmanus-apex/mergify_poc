@@ -2,27 +2,30 @@ queue_rules:
   - name: hotfix
     merge_conditions:
       - and:
-        - base=main
-        - label!=do-not-merge
+          - base=main
+          - label!=do-not-merge
+          - "#changes-requested-reviews-by=0"
     merge_method: squash
     speculative_checks: 3
-    queue_branch_prefix: mergify_poc/hotfix_queue/
+    queue_branch_prefix: hotfix_queue/
 
   - name: default
     merge_conditions:
       - or:
-        - and:
-          - base=main
-          - label!=do-not-merge
-          - "#approved-reviews-by>=1"
-          - files~=^.github/
-        - and:
-          - base=main
-          - label!=do-not-merge
-          - -files~=^.github/
+          - and:
+              - base=main
+              - label!=do-not-merge
+              - "#changes-requested-reviews-by=0"
+              - "#approved-reviews-by>=1"
+              - files~=^.github/
+          - and:
+              - base=main
+              - "#changes-requested-reviews-by=0"
+              - label!=do-not-merge
+              - -files~=^.github/
     merge_method: squash
     speculative_checks: 3
-    queue_branch_prefix: mergify_poc/merge_queue/
+    queue_branch_prefix: merge_queue/
 
 
 pull_request_rules:
@@ -33,19 +36,6 @@ pull_request_rules:
           - label=automerge
           - label!=stale
           - label!=do-not-merge
-          - -files~=^.github/
-    actions:
-      queue:
-
-  - name: Enqueue Extra protected
-    conditions:
-      - and:
-          - base=main
-          - "#approved-reviews-by>=2"
-          - label=automerge
-          - label!=stale
-          - label!=do-not-merge
-          - files~=^.github/
     actions:
       queue:
 
@@ -53,8 +43,8 @@ pull_request_rules:
     conditions:
       - and:
           - base=main
-          - "#approved-reviews-by>=0"
           - label=hotfix
+          - label!=do-not-merge
     actions:
       queue:
         name: hotfix
@@ -65,9 +55,27 @@ pull_request_rules:
     actions:
       delete_head_branch:
 
-  - name: Label as Stale
+  - name: Add Team Label
     conditions:
-      - updated-at<1 days ago
+      - files~=^.github/
+    actions:
+      label:
+        add:
+          - team:platform-dev-exp
+
+  - name: Label as Stale (HUMAN)
+    conditions:
+      - updated-at<6 days ago
+    actions:
+      label:
+        add:
+          - stale
+
+  - name: Label as Stale (BOT)
+    conditions:
+      - and:
+          - updated-at<1 days ago
+          - label=afs-deploy-bot
     actions:
       label:
         add:
@@ -80,7 +88,7 @@ pull_request_rules:
     actions:
       close:
         message: >
-          This Pr was closed due to a stale status of > 1 day.
+          This Pr was closed due to a stale status.
 
   - name: Notify author on queue failure
     conditions:
