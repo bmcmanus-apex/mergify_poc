@@ -30,3 +30,4 @@ easily get scheduled before other PRs.
 - removing a PR from a queue
 - can you jump queue?
 - Hotfix
+- Can queue be triggered by checklist in PR description?
