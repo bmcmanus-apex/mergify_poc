@@ -23,12 +23,11 @@ easily get scheduled before other PRs.
 
 #### Merge Queue Test Cases To Demo
 
-- Merge Conflict
-- failing PR front of queue
-- failing PR last in queue
-- requeue
-- removing a PR from a queue
-- can you jump queue?
-- Hotfix
-- Can queue be triggered by checklist in PR description?
-  - pending testing
+* Merge Conflict
+* failing PR front of queue
+* failing PR last in queue
+* requeue
+* removing a PR from a queue
+* can you jump queue?
+* Hotfix
+* Can queue be triggered by checklist in PR description?
