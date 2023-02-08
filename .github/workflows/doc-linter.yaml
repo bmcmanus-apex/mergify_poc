@@ -1,11 +1,6 @@
 name: Lint Docs
 
-on:
-  pull_request: {}
-  push:
-    branch:
-      - main
-
+on: pull_request
 
 jobs:
   lint-docs:
