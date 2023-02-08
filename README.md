@@ -31,4 +31,3 @@ easily get scheduled before other PRs.
 - can you jump queue?
 - Hotfix
 - Can queue be triggered by checklist in PR description?
-  - pending testing
