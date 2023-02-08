@@ -33,9 +33,11 @@ pull_request_rules:
     conditions:
       - and:
           - base=main
-          - label=automerge
           - label!=stale
           - label!=do-not-merge
+          - or:
+            - label=automerge
+            - body~=(?m)^\[X\] Docs have been updated
     actions:
       queue:
 
@@ -89,6 +91,14 @@ pull_request_rules:
       close:
         message: >
           This Pr was closed due to a stale status.
+          
+  - name: merge when checkboxes are checked
+    conditions:
+      - body~=(?m)^\[X\] Docs have been updated
+      - check-success=my favorite ci
+    actions:
+      queue:
+
 
   - name: Notify author on queue failure
     conditions:
