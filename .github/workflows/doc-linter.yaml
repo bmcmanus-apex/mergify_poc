@@ -17,7 +17,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: sleep some
+      - name: sleep some more
         run: sleep 30s
         shell: bash
 
