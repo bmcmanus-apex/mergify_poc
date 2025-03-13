@@ -1,3 +1,5 @@
+# THIS REPOSITORY HAS SERVED IT'S PURPOSE AND HAS BEEN ARCHIVED
+
 # Mergify PoC
 
 Public repo for PoC work with respect to merge_queues and Mergify
